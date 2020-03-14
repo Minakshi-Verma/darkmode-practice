@@ -128,3 +128,34 @@ After finishing your required elements, you can push your work further. These go
 - Go to the [Coin Gecko API](https://www.coingecko.com/) where we got this data from, and add more features to your app. Maybe you want to make a dropdown list of coins, and only look at one coin at a time. You could make an API call to that API for a specific coin and get more data on it. You could get more specific coin data for the last 24 hrs. There's a lot you can do with this API. Explore and have fun!
 
 - Look into the recharts library and build a new chart. Or change the appearence of the charts we built out here. Maybe when you toggle to dark mode, the line on the chart could change colors! There's a lot you can do with this library. Explore and have fun!
+
+
+EXTRA NOTES:
+*YOU CAN ONLY STORE STRINGS IN LOCALSTORAGE, IF YOU HAVE SOMETHING THAT IS NOT STRING , YOU NEED TO USE JS STRINGIFY FUNCTION TO CONVERT THAT VALUE IN STRING. AND YOU PARSE IT LATER
+
+EXAMPLE 
+JSON.stringify([1,2,3])---------->gives you "[1,2,3]"
+JSON.parse"[1,2,3]"--------------> gives you [1,2,3]
+
+1-how to check list of keys in your localstorage through console.log?
+-window.localStorage
+
+2- How to set a new key?
+-window.localStorage.setItem("newkey", "newValue")
+
+3- how to check the value of the key?
+-window.localStorage.getItem("newkey")
+(If you are enquiring about a key that is not in local storage, you get "null")
+
+4-What if you want to store a value which is not a string---simple stringify it!
+ say, I want to store an array. key= arr; value= [1,2,3]
+ -window.localStorage.setItem("arr", JSON.stringify([1,2,3]))
+ (if you check your local storage, you will see key: 'arr"; value: "[1,2,3]")
+
+ you can parse it if you want to retrieve it
+ -JSON.parse(window.localStorage.getItem("arr"))----->you get Array(3) [1.2.3]
+
+
+5- how to remove the existing key from the localstorage?
+
+
