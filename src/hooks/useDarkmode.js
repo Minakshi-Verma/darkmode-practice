@@ -1,29 +1,21 @@
-import {useState} from 'react';
+import {useEffect} from 'react';
+import useLocalStorage from  './useLocalStorage';
 
-//we are not using JSX here so no need to import react like we always do
+const useDarkMode = (initialValue) =>{
 
-const useLocalStorage = (key, initialValue) =>{       //we will need an extra peace of info--key, to store our initialValue
-// const [storedValue, setStoredValue] = useState(initialValue) //we donot want to store initialValue as stored value in our custom hook, what if we already have a value  in our localStorage , we would consider that as our initial value. We can accomplish that using callback function(useState permit that) and returning the final value.
-const [storedValue, setStoredValue] = useState(()=>{
-    const item = window.localStorage.getItem(key)
-    if (item){
-        return JSON.parse(item)   //if the item exists, means: there was somelocalStorage and we want to use that else initial value
-    }else{
-        return initialValue
-    } 
-    //we can use ternary instead of if/else statement
-    // return (item ?  JSON.parse(item): initialValue)  
- });
-    const setValue = value =>{
-    setStoredValue(value);
-    window.localStorage.setItem(key,JSON.stringify(value))
- }
-     return [storedValue, setValue]
+const [darkMode, setDarkMode] = useLocalStorage('dark-mode', initialValue);
+//This if else code block will render everytim ethe app rerender, and it would be wasteful. So put that in useEffect hook and add a dependency array.  Now the darkmode will change when we want it to change.The rendering of this code block depends on the value darkMode and it will changewhen value of darkMode changes(means, darkMode is true or false)
+useEffect(()=>{
+    if(darkMode){
+            document.body.classList.add('dark-mode');
+        }else{
+            document.body.classList.remove('dark-mode')
+        }
+}, [darkMode]);    
+return[darkMode, setDarkMode];
 }
 
-// useLocalStorage(key, initialValue)-------->[value. setValue]
 
-export default useLocalStorage;
-
+export default useDarkMode
 
 
